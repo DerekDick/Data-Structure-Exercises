@@ -2,185 +2,283 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct Student Student;
-
-Student* head = NULL;
-Student* previous = NULL;
-Student* current = NULL;
-
-void addStudent(void);
-void printStudent(Student* student);
-void printDataBase(void);
-void insertStudent(void);
-void deleteStudent(void);
-
 struct Student {
-	char number[16] = "";
-	char name[32] = "";
-	char gender[16] = "";
-	char age[3] = "";
-	char type[32] = "";
-
-	Student* next = NULL;
+	char number[16];
+	char name[32];
+	char gender[8];
+	char age[8];
+	char type[32];
+	Student* next;
 };
 
+Student* head;
+
+void addStudent(void);
+void insertStudent();
+void deleteStudent(void);
+void searchStudent(void);
+void modifyStudent(void);
+void count(void);
+void inputStudent(Student* destination);
+void printStudent(Student* student);
+void copyStudent(Student* destination, Student* source);
+
 int main(int argc, char* argv[]) {
-	//Input the initial information of students
+	//Hello information
+	printf("*************************\n");
+	printf("*欢迎使用考试报名系统！ *\n");
+	printf("*开发人员：侯剑锋1552719*\n");
+	printf("*************************\n\n");
+	printf("首先请建立考生信息系统！\n");
+
+	//Set up the initial database
 	int n = 0;
-	printf("首先请建立考生信息系统！\n请输入考生人数：");
+	printf("请输入考生人数：");
 	scanf("%d", &n);
-	printf("请依次输入考生的考号，姓名，性别，年龄及报考类别！\n");
-	head = current = (Student*)calloc(1, sizeof(Student));
+	printf("请依次输入考生的考号，姓名，性别，年龄及报考类别（请以一个空格隔开各项）：\n");
 	for (int i = 0; i < n; i++) {
 		addStudent();
 	}
 
-	//Accept the choice of the user and operate
-	int choice = 0; //The choice of the user, 1 for insertion, 2 for deletion, 3 for searching, 4 for modification, 5 for statistics and 0 for cancellation
-	printf("请选择您要进行的操作（1为插入，2为删除，3为查找，4为修改，5为统计0为取消操作）：\n");
-	scanf("%d", &choice);
-	while (choice) {
-		switch (choice) {
-			//Insertion
-		case 1:
-			insertStudent();
-			break;
-			//Deletion
-		case 2:
-			deleteStudent();
-			break;
-			//Searching
-		case 3:
+	//Display the students that the user has just input
+	printf("您已经输入了如下数据：\n");
+	count();
 
-			break;
-			//Modification
-		case 4:
-
-			break;
-			//Statistics
-		case 5:
-			printDataBase();
+	//Receive the user's choice and operate according to the choice in loops
+	printf("请选择您要进行的操作（1为插入，2为删除，3为查找，4为修改，5为统计，0为取消操作）：\n");
+	char choice = '\0';
+	while (scanf(" %c", &choice)) {
+		//Cancel
+		if (choice == '0') {
+			printf("即将退出考试报名系统！\n");
 			break;
 		}
 
-		printf("请选择您要进行的操作（1为插入，2为删除，3为查找，4为修改，5为统计0为取消操作）：\n");
-		scanf("%d", &choice);
+		//Insert
+		else if (choice == '1') {
+			insertStudent();
+			printf("请选择您要进行的操作（1为插入，2为删除，3为查找，4为修改，5为统计，0为取消操作）：\n");
+		}
+
+		//Delete
+		else if (choice == '2') {
+			deleteStudent();
+			printf("请选择您要进行的操作（1为插入，2为删除，3为查找，4为修改，5为统计，0为取消操作）：\n");
+		}
+
+		//Search
+		else if (choice == '3') {
+			searchStudent();
+			printf("请选择您要进行的操作（1为插入，2为删除，3为查找，4为修改，5为统计，0为取消操作）：\n");
+		}
+
+		//Modify
+		else if (choice == '4') {
+			modifyStudent();
+			printf("请选择您要进行的操作（1为插入，2为删除，3为查找，4为修改，5为统计，0为取消操作）：\n");
+		}
+
+		//Count
+		else if (choice == '5') {
+			count();
+			printf("请选择您要进行的操作（1为插入，2为删除，3为查找，4为修改，5为统计，0为取消操作）：\n");
+		}
+
+		//Exceptions
+		else {
+			printf("Illegal input!!!\n");
+			printf("请选择您要进行的操作（1为插入，2为删除，3为查找，4为修改，5为统计，0为取消操作）：\n");
+		}
 	}
 
 	return 0;
 }
 
+//Add a student at the end of the current linked list
 void addStudent(void) {
-	/*Add a student at the current point*/
-	scanf("%s", current->number);
-	scanf("%s", current->name);
-	scanf("%s", current->gender);
-	scanf("%s", current->age);
-	scanf("%s", current->type);
-	previous = current;
-	current = (Student*)calloc(1, sizeof(Student));
-	previous->next = current;
+	//Read in the student
+	Student* temp = (Student*)calloc(1, sizeof(Student));
+	inputStudent(temp);
 
-	return;
-}
-
-void printStudent(Student* student) {
-	/*Print out the information of the student*/
-	printf("%-8s", student->number);
-	printf("%-10s", student->name);
-	printf("%-6s", student->gender);
-	printf("%-6s", student->age);
-	printf("%-20s", student->type);
-	printf("\n");
-
-	return;
-}
-
-void printDataBase(void) {
-	/*Print out all the students in the data base*/
-	printf("考号    姓名      性别  年龄  报考类别\n");
-	current = head;
-	do {
-		printStudent(current);
-		current = current->next;
-	} while (current->next);
-
-	return;
-}
-
-void insertStudent() {
-	/*Insert a student at the specified position*/
-	//Promopt user
-	int index = 0;
-	printf("请输入您要插入的考生的位置：\n");
-	scanf("%d", &index);
-
-	//Input the new student
-	Student* newStudent = (Student*)calloc(1, sizeof(Student));
-	printf("请依次输入考生的考号，姓名，性别，年龄及报考类别！\n");
-	scanf("%s", newStudent->number);
-	scanf("%s", newStudent->name);
-	scanf("%s", newStudent->gender);
-	scanf("%s", newStudent->age);
-	scanf("%s", newStudent->type);
-
-	//Organise the data base
-	if (index <= 0) {
-		printf("Illegal input!(The insetion index must be a positive integer!\n)");
-		return;
+	//Check if the number of the current student to be added already exists
+	for (Student* current = head; current; current = current->next) {
+		if (!strcmp(current->number, temp->number)) {
+			printf("已经存在相同考号的考生！\n");
+			free(temp);
+			return;
+		}
 	}
-	else if (index - 1) {
-		current = head;
-		for (int i = 0; i < index - 2; i++) {
+
+	//Add a student at the end of the linked list
+	if (!head) {
+		head = (Student*)calloc(1, sizeof(Student));
+		copyStudent(head, temp);
+	}
+	else {
+		Student* current = head;
+		while (current->next) {
 			current = current->next;
 		}
-		newStudent->next = current->next;
-		current->next = newStudent;
+		current->next = (Student*)calloc(1, sizeof(Student));
+		current = current->next;
+		copyStudent(current, temp);
 	}
-	else {
-		newStudent->next = head;
-		head = newStudent;
-	}
+	free(temp);
 
 	return;
 }
 
+//Insert a student at a certain position
+void insertStudent(void) {
+	//Prompt the user to input the position of the insertion
+	printf("请输入您要插入的考生的位置（一个不超过已经输入学生数量的正整数）：");
+	
+	//Input a student
+	int position = 0;
+	scanf("%d", &position);
+	Student* temp = (Student*)calloc(1, sizeof(Student));
+	printf("请输入您要插入的考生的考号，姓名，性别，年龄及报考类别（请以一个空格隔开各项）：\n");
+	inputStudent(temp);
+
+	//Check if the number of the current student to be added already exists
+	for (Student* current = head; current; current = current->next) {
+		if (!strcmp(current->number, temp->number)) {
+			printf("已经存在相同考号的考生！\n");
+			free(temp);
+			return;
+		}
+	}
+
+	if (position == 1) {
+		temp->next = head;
+		head = temp;
+		return;
+	}
+	Student* current = head;
+	for (int i = 0; i < position - 1; i++) {
+		if (!current) {
+			printf("Illegal input!!!\n");
+			printf("超过已有考生数量！\n");
+			free(temp);
+			return;
+		}
+		current = current->next;
+	}
+	copyStudent(current, temp);
+	free(temp);
+
+	return;
+}
+
+//Input a Student
+void inputStudent(Student* destination) {
+	//Read in the information
+	scanf("%s %s %s %s %s", destination->number, destination->name, destination->gender, destination->age, destination->type);
+
+	return;
+}
+
+//Copy a Student from another Student
+void copyStudent(Student* destination, Student* source) {
+	strcpy(destination->number, source->number);
+	strcpy(destination->name, source->name);
+	strcpy(destination->gender, source->gender);
+	strcpy(destination->age, source->age);
+	strcpy(destination->type, source->type);
+
+	return;
+}
+
+//Delete a Student
 void deleteStudent(void) {
-	/*Delete a student at the specified position*/
+	//Input the number of the Student to be deleted
+	printf("请输入您要删除的考生的考号：");
 	char number[16] = "";
-	printf("请输入您要删除的考生的考号：\n");
 	scanf("%s", number);
 
-	//Find the student
-	current = head;
-	do {
+	//Search and delete the Student
+	Student* current = head;
+	while (current) {
 		if (!strcmp(current->number, number)) {
-			break;
-		}
-	} while (current->next);
-
-	//Delete the student
-	if (!current->next) {
-		printf("不存在该考生！\n");
-	}
-	else if (!current->next->next) {
-		strcpy(current->number, "");
-		strcpy(current->name, "");
-		strcpy(current->gender, "");
-		strcpy(current->age, "");
-		strcpy(current->type, "");
-		free(current->next);
-		current->next = NULL;
-	}
-	else {
-		if (current == head) {
-			head = current->next;
+			Student* temp = head;
+			while (temp->next != current) {
+				temp = temp->next;
+			}
+			temp->next = current->next;
 			free(current);
+			return;
 		}
-		else {
-
-		}
+		current = current->next;
 	}
+	printf("未找到该考生！\n");
+
+	return;
+}
+
+//Search for a Student and print it
+void searchStudent(void) {
+	//Input the nubmer of the Student to be searched for
+	printf("请输入您要查找的考生的考号：");
+	char number[16] = "";
+	scanf("%s", number);
+
+	//Searching...
+	Student* current = head;
+	while (current) {
+		if (!strcmp(current->number, number)) {
+			printf("考号  姓名  性别  年龄  报考类别\n");
+			printStudent(current);
+			return;
+		}
+		current = current->next;
+	}
+	printf("未找到该考生！\n");
+
+	return;
+}
+
+//Print the information of a Student
+void printStudent(Student* student) {
+	printf("%10s %10s %6s %6s %20s\n", student->number, student->name, student->gender, student->age, student->type);
+
+	return;
+}
+
+//Modify the information of a Student
+void modifyStudent(void) {
+	//Prompt the user to input the information of the Student to be modified
+	Student* temp = (Student*)calloc(1, sizeof(Student));
+	printf("请输入您要修改的考生的考号，姓名，性别，年龄及报考类别（请以一个空格隔开各项）：\n");
+	inputStudent(temp);
+
+	//Search and modify the Student
+	Student* current = head;
+	while (current) {
+		if (!strcmp(current->number, temp->number)) {
+			Student* t = head;
+			copyStudent(current, temp);
+			free(temp);
+			return;
+		}
+		current = current->next;
+	}
+	printf("未找到该考生！\n");
+	free(temp);
+
+	return;
+}
+
+//Print all the students and count the number
+void count(void) {
+	Student* current = head;
+	int count = 0;
+	printf("      考号       姓名   性别   年龄             报考类别\n");
+	while (current) {
+		printStudent(current);
+		count++;
+		current = current->next;
+	}
+	printf("学生数量：%d\n", count);
 
 	return;
 }
