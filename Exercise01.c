@@ -57,38 +57,34 @@ int main(int argc, char* argv[]) {
 		//Insert
 		else if (choice == '1') {
 			insertStudent();
-			printf("请选择您要进行的操作（1为插入，2为删除，3为查找，4为修改，5为统计，0为取消操作）：\n");
 		}
 
 		//Delete
 		else if (choice == '2') {
 			deleteStudent();
-			printf("请选择您要进行的操作（1为插入，2为删除，3为查找，4为修改，5为统计，0为取消操作）：\n");
 		}
 
 		//Search
 		else if (choice == '3') {
 			searchStudent();
-			printf("请选择您要进行的操作（1为插入，2为删除，3为查找，4为修改，5为统计，0为取消操作）：\n");
 		}
 
 		//Modify
 		else if (choice == '4') {
 			modifyStudent();
-			printf("请选择您要进行的操作（1为插入，2为删除，3为查找，4为修改，5为统计，0为取消操作）：\n");
 		}
 
 		//Count
 		else if (choice == '5') {
 			count();
-			printf("请选择您要进行的操作（1为插入，2为删除，3为查找，4为修改，5为统计，0为取消操作）：\n");
 		}
 
 		//Exceptions
 		else {
 			printf("Illegal input!!!\n");
-			printf("请选择您要进行的操作（1为插入，2为删除，3为查找，4为修改，5为统计，0为取消操作）：\n");
 		}
+
+		printf("请选择您要进行的操作（1为插入，2为删除，3为查找，4为修改，5为统计，0为取消操作）：\n");
 	}
 
 	return 0;
