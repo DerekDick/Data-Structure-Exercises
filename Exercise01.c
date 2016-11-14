@@ -14,7 +14,7 @@ struct Student {
 Student* head;
 
 void addStudent(void);
-void insertStudent();
+void insertStudent(void);
 void deleteStudent(void);
 void searchStudent(void);
 void modifyStudent(void);
@@ -255,7 +255,6 @@ void modifyStudent(void) {
 	Student* current = head;
 	while (current) {
 		if (!strcmp(current->number, temp->number)) {
-			Student* t = head;
 			copyStudent(current, temp);
 			free(temp);
 			return;
