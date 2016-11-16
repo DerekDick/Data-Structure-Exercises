@@ -1,5 +1,5 @@
-#ifndef _STUDENT_D_B_
-#define _STUDENT_D_B_
+#ifndef _STUDENT_D_B_H_
+#define _STUDENT_D_B_H_
 
 #include "Student.h"
 
@@ -19,4 +19,4 @@ public:
 	void count(void);
 };
 
-#endif // _STUDENT_D_B_
+#endif // _STUDENT_D_B_H_
