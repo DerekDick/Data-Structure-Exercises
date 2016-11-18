@@ -25,7 +25,7 @@ void StudentDB::addStudent(std::istream& in) {
 
 	//Add a student at the end of the single linked list
 	if (!this->_head) {
-		this->_head = (Student*)calloc(1, sizeof(Student));
+		this->_head = new Student();
 		Student::copyStudent(this->_head, temp);
 	}
 	else {
