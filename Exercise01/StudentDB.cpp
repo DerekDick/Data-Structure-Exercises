@@ -1,6 +1,5 @@
 #include "StudentDB.h"
 #include <iostream>
-#include <cstdlib> //For calloc()
 
 StudentDB::StudentDB() {
 }
@@ -12,14 +11,14 @@ StudentDB::~StudentDB() {
 //Add a student at the end of the current linked list
 void StudentDB::addStudent(std::istream& in) {
 	//Read in the student
-	Student* temp = (Student*)calloc(1, sizeof(Student));
+	Student* temp = new Student();
 	temp->input(in);
 
 	//Check if the number of the current student to be added already exists
 	for (Student* current = this->_head; current; current = current->getNext()) {
 		if (!current->getNumber().compare(temp->getNumber())) {
 			std::cout << "已经存在相同考号的考生！" << std::endl;
-			free(temp);
+			delete temp;
 			return;
 		}
 	}
@@ -34,11 +33,11 @@ void StudentDB::addStudent(std::istream& in) {
 		while (current->getNext()) {
 			current = current->getNext();
 		}
-		current->setNext((Student*)calloc(1, sizeof(Student)));
+		current->setNext(new Student());
 		current = current->getNext();
 		Student::copyStudent(current, temp);
 	}
-	free(temp);
+	delete temp;
 
 	return;
 }
@@ -51,7 +50,7 @@ void StudentDB::insertStudent(void) {
 	//Input a student
 	int position = 0;
 	std::cin >> position;
-	Student* temp = (Student*)calloc(1, sizeof(Student));
+	Student* temp = new Student();
 	std::cout << "请输入您要插入的考生的考号，姓名，性别，年龄及报考类别（请以一个空格隔开各项）：" << std::endl;
 	temp->input(std::cin);
 
@@ -59,7 +58,7 @@ void StudentDB::insertStudent(void) {
 	for (Student* current = this->_head; current; current = current->getNext()) {
 		if (!current->getNumber().compare(temp->getNumber())) {
 			std::cout << "已经存在相同考号的考生！" << std::endl;
-			free(temp);
+			delete temp;
 			return;
 		}
 	}
@@ -74,13 +73,13 @@ void StudentDB::insertStudent(void) {
 		if (!current) {
 			printf("Illegal input!!!\n");
 			printf("超过已有考生数量！\n");
-			free(temp);
+			delete temp;
 			return;
 		}
 		current = current->getNext();
 	}
 	Student::copyStudent(current, temp);
-	free(temp);
+	delete temp;
 
 	return;
 }
@@ -101,7 +100,7 @@ void StudentDB::deleteStudent(void) {
 				temp = temp->getNext();
 			}
 			temp->setNext(current->getNext());
-			free(current);
+			delete current;
 			return;
 		}
 		current = current->getNext();
@@ -136,7 +135,7 @@ void StudentDB::searchStudent(void) {
 //Modify the information of a Student
 void StudentDB::modifyStudent(void) {
 	//Prompt the user to input the information of the Student to be modified
-	Student* temp = (Student*)calloc(1, sizeof(Student));
+	Student* temp = new Student();
 	std::cout << "请输入您要修改的考生的考号，姓名，性别，年龄及报考类别（请以一个空格隔开各项）：" << std::endl;
 	temp->input(std::cin);
 
@@ -145,13 +144,13 @@ void StudentDB::modifyStudent(void) {
 	while (current) {
 		if (!current->getNumber().compare(temp->getNumber())) {
 			Student::copyStudent(current, temp);
-			free(temp);
+			delete temp;
 			return;
 		}
 		current = current->getNext();
 	}
 	std::cout << "未找到该考生！" << std::endl;
-	free(temp);
+	delete temp;
 
 	return;
 }
