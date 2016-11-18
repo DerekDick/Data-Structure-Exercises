@@ -11,7 +11,7 @@ int main(int argc, char* argv[]) {
 
 	//Set up the initial database
 	std::cout << "首先请建立考生信息系统！" << std::endl;
-	StudentDB* studentDB = (StudentDB*)calloc(1, sizeof(StudentDB));
+	StudentDB* studentDB = new StudentDB();
 	int n = 0;
 	std::cout << "请输入考生人数：" << std::endl;
 	std::cin >> n;
@@ -31,6 +31,7 @@ int main(int argc, char* argv[]) {
 		//Cancel
 		if (choice == '0') {
 			std::cout << "即将退出考试报名系统！" << std::endl;
+			delete studentDB;
 			break;
 		}
 
