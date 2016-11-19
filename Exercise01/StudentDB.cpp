@@ -1,13 +1,6 @@
 #include "StudentDB.h"
 #include <iostream>
 
-StudentDB::StudentDB() {
-}
-
-
-StudentDB::~StudentDB() {
-}
-
 //Add a student at the end of the current linked list
 void StudentDB::addStudent(std::istream& in) {
 	//Read in the student
@@ -71,8 +64,8 @@ void StudentDB::insertStudent(void) {
 	Student* current = this->_head;
 	for (int i = 0; i < position - 1; i++) {
 		if (!current) {
-			printf("Illegal input!!!\n");
-			printf("超过已有考生数量！\n");
+			std::cout << "Illegal input!!!" << std::endl;
+			std::cout << "超过已有考生数量！" << std::endl;
 			delete temp;
 			return;
 		}
