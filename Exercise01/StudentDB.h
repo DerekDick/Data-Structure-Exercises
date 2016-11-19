@@ -8,8 +8,8 @@ class StudentDB {
 	Student* _head;
 
 public:
-	StudentDB();
-	~StudentDB();
+	StudentDB() = default;
+	~StudentDB() = default;
 
 	void addStudent(std::istream& in);
 	void insertStudent(void);
