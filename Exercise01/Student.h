@@ -14,8 +14,8 @@ class Student {
 
 public:
 	//Function members
-	Student();
-	~Student();
+	Student() = default;
+	~Student() = default;
 
 	std::string getNumber(void);
 	void setNumber(const std::string& number);
