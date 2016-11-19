@@ -2,13 +2,6 @@
 #include <iostream>
 #include <iomanip> //For std::setw()
 
-Student::Student() {
-}
-
-
-Student::~Student() {
-}
-
 std::string Student::getNumber(void) {
 	return this->_number;
 }
