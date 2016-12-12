@@ -3,13 +3,13 @@
 #include "StudentDB.h"
 
 int main(int argc, char* argv[]) {
-	//Welcoming information
+	// Welcoming information
 	std::cout << "*************************" << std::endl;
 	std::cout << "*欢迎使用考试报名系统！ *" << std::endl;
 	std::cout << "*开发人员：侯剑锋1552719*" << std::endl;
 	std::cout << "*************************" << std::endl << std::endl;
 
-	//Set up the initial database
+	// Set up the initial database
 	std::cout << "首先请建立考生信息系统！" << std::endl;
 	StudentDB* studentDB = new StudentDB();
 	int n = 0;
@@ -20,47 +20,47 @@ int main(int argc, char* argv[]) {
 		studentDB->addStudent(std::cin);
 	}
 
-	//Display the students that the user has just input
+	// Display the students that the user has just input
 	std::cout << "您已经输入了如下数据：" << std::endl;
 	studentDB->count();
 
-	//Receive the user's choice and operate according to the choice in loops
+	// Receive the user's choice and operate according to the choice in loops
 	std::cout << "请选择您要进行的操作（1为插入，2为删除，3为查找，4为修改，5为统计，0为取消操作）：" << std::endl;
 	char choice = '\0';
 	while (std::cin >> choice) {
-		//Cancel
+		// Cancel
 		if (choice == '0') {
 			std::cout << "即将退出考试报名系统！" << std::endl;
 			delete studentDB;
 			break;
 		}
 
-		//Insert
+		// Insert
 		else if (choice == '1') {
 			studentDB->insertStudent();
 		}
 
-		//Delete
+		// Delete
 		else if (choice == '2') {
 			studentDB->deleteStudent();
 		}
 
-		//Search
+		// Search
 		else if (choice == '3') {
 			studentDB->searchStudent();
 		}
 
-		//Modify
+		// Modify
 		else if (choice == '4') {
 			studentDB->modifyStudent();
 		}
 
-		//Count
+		// Count
 		else if (choice == '5') {
 			studentDB->count();
 		}
 
-		//Exceptions
+		// Exceptions
 		else {
 			std::cout << "Illegal input!!!" << std::endl;
 		}
