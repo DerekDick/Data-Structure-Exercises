@@ -1,6 +1,6 @@
 #include "Student.h"
 #include <iostream>
-#include <iomanip> //For std::setw()
+#include <iomanip> // For std::setw()
 
 std::string Student::getNumber(void) {
 	return this->_number;
@@ -50,7 +50,7 @@ void Student::setNext(Student* next) {
 	this->_next = next;
 }
 
-//Copy a student from another student
+// Copies a student from another student
 void Student::copyStudent(Student* destination, Student* source) {
 	destination->setNumber(source->getNumber());
 	destination->setName(source->getName());
@@ -61,17 +61,17 @@ void Student::copyStudent(Student* destination, Student* source) {
 	return;
 }
 
-//Input a Student from a std::istream
+// Inputs a Student from a std::istream
 void Student::input(std::istream& in) {
-	//Read in the information
+	// Read in the information
 	in >> this->_number >> this->_name >> this->_gender >> this->_age >> this->_type;
 
 	return;
 }
 
-//Output a Student to a std::ostream
+// Outputs a Student to a std::ostream
 void Student::output(std::ostream& out) {
-	out << std::setw(10) << this->getNumber() << std::setw(10) << this->getName() << std::setw(6) << this->getGender() << std::setw(6) << this->getAge() << std::setw(20) << this->getType() << std::endl;
+	out << std::setw(10) << this->getNumber() << std::setw(11) << this->getName() << std::setw(7) << this->getGender() << std::setw(7) << this->getAge() << std::setw(21) << this->getType() << std::endl;
 
 	return;
 }
