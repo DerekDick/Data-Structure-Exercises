@@ -34,33 +34,33 @@ public:
 		int pivot = TArray[end - 1];
 
 		// Partition
-		int i = begin, j = end - 1;
-		while (i < j) {
-			while (TArray[i] < pivot) {
-				i++;
+		int leftIndex = begin, rightIndex = end - 1;
+		while (leftIndex < rightIndex) {
+			while (TArray[leftIndex] < pivot) {
+				leftIndex++;
 			}
-			while (pivot < TArray[j]) {
-				j--;
+			while (pivot < TArray[rightIndex]) {
+				rightIndex--;
 			}
-			if (i < j) {
-				T temp = TArray[i];
-				TArray[i] = TArray[j];
-				TArray[j] = temp;
-				i++;
-				j--;
+			if (leftIndex < rightIndex) {
+				T temp = TArray[leftIndex];
+				TArray[leftIndex] = TArray[rightIndex];
+				TArray[rightIndex] = temp;
+				leftIndex++;
+				rightIndex--;
 			}
-			else if (i == j) {
-				i++;
-				j--;
+			else if (leftIndex == rightIndex) {
+				leftIndex++;
+				rightIndex--;
 			}
 		}
 
 		// Recursion
-		if (begin < j) {
-			quick_sort(TArray, begin, j + 1);
+		if (begin < rightIndex) {
+			quick_sort(TArray, begin, rightIndex + 1);
 		}
-		if (i < end - 1) {
-			quick_sort(TArray, i, end);
+		if (leftIndex < end - 1) {
+			quick_sort(TArray, leftIndex, end);
 		}
 
 		return;
@@ -123,8 +123,53 @@ public:
 		* Soring range: [begin, end)
 		*/
 
+		if (end - begin == 1) {
+			return;
+		}
 
-		return;
+		else {
+			// Partition
+			int middle = (begin + end - 1) / 2;
+			merge_sort(TArray, begin, middle + 1);
+			merge_sort(TArray, middle + 1, end);
+
+			// Merge
+			int leftLength = (middle + 1) - begin;
+			int rightLength = end - (middle + 1);
+			T* leftCopy = new T[leftLength];
+			T* rightCopy = new T[rightLength];
+			for (int i = 0; i < leftLength; i++) {
+				leftCopy[i] = TArray[begin + i];
+			}
+			for (int i = 0; i < rightLength; i++) {
+				rightCopy[i] = TArray[middle + 1 + i];
+			}
+			int leftIndex = 0;
+			int rightIndex = 0;
+			for (int i = begin; i < end; i++) {
+				if (leftIndex == leftLength) {
+					TArray[i] = rightCopy[rightIndex];
+					rightIndex++;
+				}
+				else if (rightIndex == rightLength) {
+					TArray[i] = leftCopy[leftIndex];
+					leftIndex++;
+				}
+
+				else if (leftCopy[leftIndex] < rightCopy[rightIndex]) {
+					TArray[i] = leftCopy[leftIndex];
+					leftIndex++;
+				}
+				else {
+					TArray[i] = rightCopy[rightIndex];
+					rightIndex++;
+				}
+			}
+			delete[] leftCopy;
+			delete[] rightCopy;
+
+			return;
+		}
 	}
 };
 
