@@ -1,6 +1,5 @@
-
-#ifndef _SORTING_H_
-#define _SORTING_H_
+#ifndef _SORTING_HPP_
+#define _SORTING_HPP_
 
 class Sorting {
 public:
@@ -129,4 +128,4 @@ public:
 	}
 };
 
-#endif // _SORTING_H_
+#endif // _SORTING_HPP_
