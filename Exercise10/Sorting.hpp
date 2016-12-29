@@ -1,6 +1,8 @@
 #ifndef _SORTING_HPP_
 #define _SORTING_HPP_
 
+#include <cmath> // For floor(), log10(), abs() and pow()
+
 class Sorting {
 public:
 	template <class T>
@@ -170,6 +172,68 @@ public:
 
 			return;
 		}
+	}
+
+	static void radix_sort(int intArray[], int begin, int end) {
+		/*
+		* Sorts the array of integers using radix sorting algorithm
+		* Using bubble sorting algorithm for every layer of sorting
+		* Soring range: [begin, end)
+		*/
+
+		// Find the maximum value among the elements to be sorted
+		int maxValue = intArray[begin];
+		for (int i = begin; i < end; i++) {
+			if (maxValue < intArray[i]) {
+				maxValue = intArray[i];
+			}
+		}
+
+		// Get the max digit length
+		int digitLength = floor(log10(abs(maxValue))) + 1;
+
+		// Sort the array in loops according to every single digit of the integers
+		for (int i = 0; i < digitLength; i++) {
+			for (int j = end - 1; j > begin; j--) {
+				for (int k = begin; k < j; k++) {
+					// Get the two digit of the two numbers to be compared
+					int digit_k = getDigitAtIndex(intArray[k], i);
+					int digit_k_1 = getDigitAtIndex(intArray[k + 1], i);
+					
+					// Compare the two numbers
+					if (digit_k > digit_k_1) {
+						int temp = intArray[k];
+						intArray[k] = intArray[k + 1];
+						intArray[k + 1] = temp;
+					}
+				}
+			}
+		}
+
+
+		return;
+	}
+
+	static int getDigitAtIndex(int integer, int index) {
+		// Return the digit at the index of an integer
+		if (!index) {
+			return integer % (int)pow(10, index + 1);
+		}
+		else {
+			return (integer % (int)pow(10, index + 1)) / (int)pow(10, index);
+		}
+	}
+
+	template <class T>
+	static void heap_sort(T TArray[], int begin, int end) {
+		/*
+		* Sorts the array of the type T using heap sorting algorithm
+		* Soring range: [begin, end)
+		*/
+
+
+
+		return;
 	}
 };
 
