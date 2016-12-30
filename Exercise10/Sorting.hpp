@@ -6,15 +6,19 @@
 class Sorting {
 public:
 	template <class T>
-	static void bubble_sort(T TArray[], int begin, int end) {
+	static int bubble_sort(T TArray[], int begin, int end) {
 		/*
 		* Sorts the array of the type T using bubble sorting algorithm
 		* Soring range: [begin, end)
+		* Return the number of swap times
 		*/
+
+		int swapTimes = 0;
 
 		for (int i = end - 1; i > begin; i--) {
 			for (int j = begin; j < i; j++) {
 				if (TArray[j] > TArray[j + 1]) {
+					swapTimes++;
 					T temp = TArray[j];
 					TArray[j] = TArray[j + 1];
 					TArray[j + 1] = temp;
@@ -22,16 +26,17 @@ public:
 			}
 		}
 
-		return;
+		return swapTimes;
 	}
 
 	template <class T>
-	static void quick_sort(T TArray[], int begin, int end) {
+	static void quick_sort(T TArray[], int begin, int end, int& swapTimes) {
 		/*
 		* Sorts the array of the type T using quick sorting algorithm
 		* Soring range: [begin, end)
+		* Return the number of swap times
 		*/
-
+		
 		// Set the pivot
 		int pivot = TArray[end - 1];
 
@@ -48,6 +53,8 @@ public:
 				T temp = TArray[leftIndex];
 				TArray[leftIndex] = TArray[rightIndex];
 				TArray[rightIndex] = temp;
+				swapTimes++;
+
 				leftIndex++;
 				rightIndex--;
 			}
@@ -59,21 +66,24 @@ public:
 
 		// Recursion
 		if (begin < rightIndex) {
-			quick_sort(TArray, begin, rightIndex + 1);
+			quick_sort(TArray, begin, rightIndex + 1, swapTimes);
 		}
 		if (leftIndex < end - 1) {
-			quick_sort(TArray, leftIndex, end);
+			quick_sort(TArray, leftIndex, end, swapTimes);
 		}
 
 		return;
 	}
 
 	template <class T>
-	static void selection_sort(T TArray[], int begin, int end) {
+	static int selection_sort(T TArray[], int begin, int end) {
 		/*
 		* Sorts the array of the type T using selection sorting algorithm
 		* Soring range: [begin, end)
+		* Return the number of swap times
 		*/
+
+		int swapTimes = 0;
 
 		for (int i = begin; i < end - 1; i++) {
 			int minIndex = i;
@@ -85,17 +95,21 @@ public:
 			T temp = TArray[i];
 			TArray[i] = TArray[minIndex];
 			TArray[minIndex] = temp;
+			swapTimes++;
 		}
 
-		return;
+		return swapTimes;
 	}
 
 	template <class T>
-	static void insertion_sort(T TArray[], int begin, int end) {
+	static int insertion_sort(T TArray[], int begin, int end) {
 		/*
 		* Sorts the array of the type T using insertion sorting algorithm
 		* Soring range: [begin, end)
+		* Return the number of swap times
 		*/
+
+		int swapTimes = 0;
 
 		for (int i = begin; i < end; i++) {
 			T current = TArray[i];
@@ -103,9 +117,11 @@ public:
 			while (j >= begin) {
 				if (current < TArray[j]) {
 					TArray[j + 1] = TArray[j];
+					swapTimes++;
 				}
 				else {
 					TArray[j + 1] = current;
+					swapTimes++;
 					break;
 				}
 				j--;
@@ -115,14 +131,15 @@ public:
 			}
 		}
 
-		return;
+		return swapTimes;
 	}
 
 	template <class T>
-	static void merge_sort(T TArray[], int begin, int end) {
+	static void merge_sort(T TArray[], int begin, int end, int& compareTimes) {
 		/*
 		* Sorts the array of the type T using merge sorting algorithm
 		* Soring range: [begin, end)
+		* Return the number of swap times
 		*/
 
 		if (end - begin == 1) {
@@ -132,8 +149,8 @@ public:
 		else {
 			// Partition
 			int middle = (begin + end - 1) / 2;
-			merge_sort(TArray, begin, middle + 1);
-			merge_sort(TArray, middle + 1, end);
+			merge_sort(TArray, begin, middle + 1, compareTimes);
+			merge_sort(TArray, middle + 1, end, compareTimes);
 
 			// Merge
 			int leftLength = (middle + 1) - begin;
@@ -159,6 +176,7 @@ public:
 				}
 
 				else if (leftCopy[leftIndex] < rightCopy[rightIndex]) {
+					compareTimes++;
 					TArray[i] = leftCopy[leftIndex];
 					leftIndex++;
 				}
@@ -174,12 +192,15 @@ public:
 		}
 	}
 
-	static void radix_sort(int intArray[], int begin, int end) {
+	static int radix_sort(int intArray[], int begin, int end) {
 		/*
 		* Sorts the array of integers using radix sorting algorithm
 		* Using bubble sorting algorithm for every layer of sorting
 		* Soring range: [begin, end)
+		* Return the number of swap times
 		*/
+
+		int swapTimes = 0;
 
 		// Find the maximum value among the elements to be sorted
 		int maxValue = intArray[begin];
@@ -190,7 +211,7 @@ public:
 		}
 
 		// Get the max digit length
-		int digitLength = floor(log10(abs(maxValue))) + 1;
+		int digitLength = (int)floor(log10(abs(maxValue))) + 1;
 
 		// Sort the array in loops according to every single digit of the integers
 		for (int i = 0; i < digitLength; i++) {
@@ -211,9 +232,36 @@ public:
 		}
 
 
-		return;
+		return 0;
 	}
 
+	template <class T>
+	static int heap_sort(T TArray[], int begin, int end) {
+		/*
+		* Sorts the array of the type T using heap sorting algorithm
+		* Soring range: [begin, end)
+		* Return the number of swap times
+		*/
+
+
+
+		return 0;
+	}
+
+	template <class T>
+	static int shell_sort(T TArray[], int begin, int end) {
+		/*
+		* Sorts the array of the type T using Shell sorting algorithm
+		* Soring range: [begin, end)
+		* Return the number of swap times
+		*/
+
+
+
+		return 0;
+	}
+
+private:
 	static int getDigitAtIndex(int integer, int index) {
 		// Return the digit at the index of an integer
 		if (!index) {
@@ -222,18 +270,6 @@ public:
 		else {
 			return (integer % (int)pow(10, index + 1)) / (int)pow(10, index);
 		}
-	}
-
-	template <class T>
-	static void heap_sort(T TArray[], int begin, int end) {
-		/*
-		* Sorts the array of the type T using heap sorting algorithm
-		* Soring range: [begin, end)
-		*/
-
-
-
-		return;
 	}
 };
 
