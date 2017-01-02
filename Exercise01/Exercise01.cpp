@@ -2,12 +2,16 @@
 #include "Student.h"
 #include "StudentDB.h"
 
+void displayOptions(void);
+
 int main(int argc, char* argv[]) {
-	// Welcoming information
-	std::cout << "*************************" << std::endl;
-	std::cout << "*欢迎使用考试报名系统！ *" << std::endl;
-	std::cout << "*开发人员：侯剑锋1552719*" << std::endl;
-	std::cout << "*************************" << std::endl << std::endl;
+	// Display the welcoming information
+	std::cout << "***********************************" << std::endl;
+	std::cout << "*           Exercise 01           *" << std::endl;
+	std::cout << "*         考生报名管理系统        *" << std::endl;
+	std::cout << "*          1552719 侯剑锋         *" << std::endl;
+	std::cout << "***********************************" << std::endl;
+	displayOptions();
 
 	// Set up the initial database
 	std::cout << "首先请建立考生信息系统！" << std::endl;
@@ -25,7 +29,7 @@ int main(int argc, char* argv[]) {
 	studentDB->count();
 
 	// Receive the user's choice and operate according to the choice in loops
-	std::cout << "请选择您要进行的操作（1为插入，2为删除，3为查找，4为修改，5为统计，0为取消操作）：" << std::endl;
+	displayOptions();
 	char choice = '\0';
 	while (std::cin >> choice) {
 		// Cancel
@@ -65,8 +69,15 @@ int main(int argc, char* argv[]) {
 			std::cout << "Illegal input!!!" << std::endl;
 		}
 
-		std::cout << "请选择您要进行的操作（1为插入，2为删除，3为查找，4为修改，5为统计，0为取消操作）：" << std::endl;
+		// Display the options for the next loop
+		displayOptions();
 	}
 
 	return 0;
+}
+
+void displayOptions(void) {
+	/* Display the options for the user */
+
+	std::cout << "请选择您的操作（1-插入，2-删除，3-查找，4-修改，5-统计，0-取消操作）：" << std::endl;
 }
