@@ -1,9 +1,11 @@
 #include "StudentDB.h"
 #include <iostream>
+#include <iomanip>
 #include <map>
 
-// Adds a student at the end of the current linked list
 void StudentDB::addStudent(std::istream& in) {
+	/* Adds a student at the end of the current linked list */
+
 	// Read in the student
 	Student* temp = new Student();
 	temp->input(in);
@@ -36,8 +38,9 @@ void StudentDB::addStudent(std::istream& in) {
 	return;
 }
 
-// Inserts a student at a certain position
 void StudentDB::insertStudent(void) {
+	/* Inserts a student at a certain position */
+
 	// Prompt the user to input the position of the insertion
 	std::cout << "请输入您要插入的考生的位置（一个不超过已经输入学生数量的正整数）：" << std::endl;
 
@@ -78,8 +81,9 @@ void StudentDB::insertStudent(void) {
 	return;
 }
 
-// Deletes a Student
 void StudentDB::deleteStudent(void) {
+	/* Deletes a Student */
+
 	// Input the number of the Student to be deleted
 	std::cout << "请输入您要删除的考生的考号：" << std::endl;
 	std::string number = "";
@@ -104,8 +108,9 @@ void StudentDB::deleteStudent(void) {
 	return;
 }
 
-// Searches for a Student and print it
 void StudentDB::searchStudent(void) {
+	/* Searches for a Student and print it */
+
 	// Input the nubmer of the Student to be searched for
 	std::cout << "请输入您要查找的考生的考号：" << std::endl;
 	std::string number = "";
@@ -126,8 +131,9 @@ void StudentDB::searchStudent(void) {
 	return;
 }
 
-// Modifies the information of a Student
 void StudentDB::modifyStudent(void) {
+	/* Modifies the information of a Student */
+
 	// Prompt the user to input the information of the Student to be modified
 	Student* temp = new Student();
 	std::cout << "请输入您要修改的考生的考号，姓名，性别，年龄及报考类别（请以一个空格隔开各项）：" << std::endl;
@@ -149,11 +155,13 @@ void StudentDB::modifyStudent(void) {
 	return;
 }
 
-// Prints the statistics of this database
 void StudentDB::count(void) {
+	/* Prints the statistics of this database */
+
 	Student* current = this->_head;
 	int count = 0;
-	std::cout << "      考号       姓名   性别   年龄             报考类别" << std::endl;
+	//std::cout << "      考号       姓名   性别   年龄             报考类别" << std::endl;
+	std::cout << std::left << std::setw(10) << "考号" << std::setw(11) << "姓名" << std::setw(7) << "性别" << std::setw(7) << "年龄" << std::setw(21) << "报考类别" << std::endl;
 	while (current) {
 		current->output(std::cout);
 		count++;
@@ -170,7 +178,7 @@ void StudentDB::count(void) {
 	}
 	std::cout << "不同类别的学生数量统计：" << std::endl;
 	for (std::map<std::string, int>::iterator iter = typeMap.begin(); iter != typeMap.end(); iter++) {
-		std::cout << '\t' << iter->first << ": " << iter->second << std::endl;
+		std::cout << "    " << iter->first << ": " << iter->second << std::endl;
 	}
 
 	// Display the number of the male and female students and the male-female ratio
