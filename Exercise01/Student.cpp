@@ -1,6 +1,6 @@
 #include "Student.h"
 #include <iostream>
-#include <iomanip> // For std::setw()
+#include <iomanip>
 
 std::string Student::getNumber(void) {
 	return this->_number;
@@ -50,8 +50,9 @@ void Student::setNext(Student* next) {
 	this->_next = next;
 }
 
-// Copies a student from another student
 void Student::copyStudent(Student* destination, Student* source) {
+	/* Copies a student from another student */
+
 	destination->setNumber(source->getNumber());
 	destination->setName(source->getName());
 	destination->setGender(source->getGender());
@@ -61,17 +62,19 @@ void Student::copyStudent(Student* destination, Student* source) {
 	return;
 }
 
-// Inputs a Student from a std::istream
 void Student::input(std::istream& in) {
+	/* Inputs a Student from a std::istream */
+
 	// Read in the information
 	in >> this->_number >> this->_name >> this->_gender >> this->_age >> this->_type;
 
 	return;
 }
 
-// Outputs a Student to a std::ostream
 void Student::output(std::ostream& out) {
-	out << std::setw(10) << this->getNumber() << std::setw(11) << this->getName() << std::setw(7) << this->getGender() << std::setw(7) << this->getAge() << std::setw(21) << this->getType() << std::endl;
+	/* Outputs a Student to a std::ostream */
+
+	out << std::left << std::setw(10) << this->getNumber() << std::setw(11) << this->getName() << std::setw(7) << this->getGender() << std::setw(7) << this->getAge() << std::setw(21) << this->getType() << std::endl;
 
 	return;
 }
