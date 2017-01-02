@@ -4,7 +4,6 @@
 #include "Student.h"
 
 class StudentDB {
-	// Data members
 	Student* _head;
 
 public:
