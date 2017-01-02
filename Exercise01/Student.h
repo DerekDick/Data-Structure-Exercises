@@ -4,7 +4,6 @@
 #include <string>
 
 class Student {
-	// Data members
 	std::string _number;
 	std::string _name;
 	std::string _gender;
@@ -13,7 +12,6 @@ class Student {
 	Student* _next;
 
 public:
-	// Function members
 	Student() = default;
 	~Student() = default;
 
