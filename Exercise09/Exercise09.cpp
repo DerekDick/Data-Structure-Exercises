@@ -8,7 +8,6 @@ void search(BinarySearchTree<double> * bst);
 
 int main(int argc, char* argv[]) {
 	// Display the welcoming information
-	// Display the welcoming information
 	std::cout << "**********************************" << std::endl;
 	std::cout << "*          Exercise 09           *" << std::endl;
 	std::cout << "*       Binary Search Tree       *" << std::endl;
@@ -113,7 +112,6 @@ void search(BinarySearchTree<double> * bst) {
 	std::cout << "Please input the nubmer you want to search for:" << std::endl;
 	double current = 0.0;
 	std::cin >> current;
-	//BinarySearchTreeNode<double, double> * p = NULL;
 	if (bst->search(current)) {
 		std::cout << "The number " << current << " found in the binary search tree!" << std::endl;
 	}
