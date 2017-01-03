@@ -25,13 +25,11 @@ int main(int argc, char* argv[]) {
 		switch (option) {
 		case '1':
 			create(binarySearchTree);
-			binarySearchTree->printTree();
 
 			break;
 
 		case '2':
 			insert(binarySearchTree);
-			binarySearchTree->printTree();
 
 			break;
 
@@ -90,6 +88,7 @@ void create(BinarySearchTree<double> * bst) {
 	}
 
 	std::cout << "Binary search tree successfully created!" << std::endl;
+	bst->printTree();
 
 	return;
 }
