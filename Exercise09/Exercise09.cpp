@@ -90,7 +90,6 @@ void create(BinarySearchTree<double> * bst) {
 	}
 
 	std::cout << "Binary search tree successfully created!" << std::endl;
-	bst->printTree();
 
 	return;
 }
