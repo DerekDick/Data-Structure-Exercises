@@ -1,5 +1,4 @@
 #include <iostream>
-#include "BinaryTree.hpp"
 #include "BinarySearchTree.hpp"
 
 void printMenu(void);
@@ -26,11 +25,13 @@ int main(int argc, char* argv[]) {
 		switch (option) {
 		case '1':
 			create(binarySearchTree);
+			binarySearchTree->printTree();
 
 			break;
 
 		case '2':
 			insert(binarySearchTree);
+			binarySearchTree->printTree();
 
 			break;
 
