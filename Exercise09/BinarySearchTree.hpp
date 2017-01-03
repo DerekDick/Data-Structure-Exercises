@@ -45,6 +45,7 @@ public:
 	}
 
 	void printTree(void) const {
+		std::cout << "The current tree:" << std::endl;
 		printTree(root);
 		std::cout << std::endl;
 	}
