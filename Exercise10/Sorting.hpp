@@ -5,6 +5,9 @@
 
 class Sorting {
 public:
+	Sorting() = default;
+	~Sorting() = default;
+
 	template <class T>
 	static int bubble_sort(T TArray[], int begin, int end);
 
