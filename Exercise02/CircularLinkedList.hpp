@@ -34,14 +34,6 @@ public:
 		}
 	}
 
-	Node<T>* getHead(void) {
-		return _head;
-	}
-
-	Node<T>* getTail(void) {
-		return _tail;
-	}
-
 	T at(int index) {
 		/* Get the data of the node at the certain index of the linked list */
 		Node<T>* current = _head;
@@ -66,7 +58,7 @@ public:
 	}
 
 	Node<T>& operator[] (int index) {
-		return getDataAt(index);
+		return getNodeAt(index);
 	}
 
 private:
@@ -75,7 +67,7 @@ private:
 	Node<T>* _tail;
 
 	// Function members
-	Node<T>& getDataAt(int index) {
+	Node<T>& getNodeAt(int index) {
 		Node<T>* current = _head;
 		for (int i = 0; i < index; i++) {
 			current = current->getNext();
