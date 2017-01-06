@@ -23,7 +23,7 @@ public:
 	template <class T>
 	static void merge_sort(T TArray[], int begin, int end, int& compareTimes);
 
-	static int radix_sort(int intArray[], int begin, int end) {
+	static void radix_sort(int intArray[], int begin, int end) {
 		/*
 		* Sorts the array of integers using radix sorting algorithm
 		* Using bubble sorting algorithm for every layer of sorting
@@ -49,7 +49,7 @@ public:
 			insertion_sort_for_radix_sort(intArray, begin, end, i);
 		}
 
-		return 0;
+		return;
 	}
 
 	template <class T>
