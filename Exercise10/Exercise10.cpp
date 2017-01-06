@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
@@ -144,17 +143,71 @@ int main(int argc, char* argv[]) {
 
 		// Radix sort
 		else if (option == '6') {
+			// Copy the initial array
+			int* copyArray = new int[number];
+			for (int i = 0; i < number; i++) {
+				copyArray[i] = integers[i];
+			}
 
+			// Sort the array
+			std::clock_t beginTime = std::clock();
+			Sorting::radix_sort(copyArray, 0, number);
+			std::clock_t endTime = std::clock();
+
+			// Release the allocated memory
+			delete[] copyArray;
+
+			// Display the result
+			std::cout << "Radix Sort 基数排序：" << std::endl;
+			std::cout << '\t' << "Time 时间：" << endTime - beginTime << "ms" << std::endl;
+			std::cout << '\t' << "Compare Times 比较次数：" << 0 << std::endl;
 		}
 
 		// Heap sort
 		else if (option == '7') {
+			// Copy the initial array
+			int* copyArray = new int[number];
+			for (int i = 0; i < number; i++) {
+				copyArray[i] = integers[i];
+			}
 
+			// Sort the array
+			int swapTimes = 0, compareTimes = 0;
+			std::clock_t beginTime = std::clock();
+			Sorting::heap_sort(copyArray, 0, number, swapTimes, compareTimes);
+			std::clock_t endTime = std::clock();
+
+			// Release the allocated memory
+			delete[] copyArray;
+
+			// Display the result
+			std::cout << "Heap Sort 堆排序：" << std::endl;
+			std::cout << '\t' << "Time 时间：" << endTime - beginTime << "ms" << std::endl;
+			std::cout << '\t' << "Change Times 交换次数：" << swapTimes << std::endl;
 		}
 
 		// Shell sort
 		else if (option == '8') {
+			// Copy the initial array
+			int* copyArray = new int[number];
+			for (int i = 0; i < number; i++) {
+				copyArray[i] = integers[i];
+			}
 
+			int swapTimes = 0;
+
+			// Sort the array
+			std::clock_t beginTime = std::clock();
+			swapTimes = Sorting::shell_sort(copyArray, 0, number);
+			std::clock_t endTime = std::clock();
+
+			// Release the allocated memory
+			delete[] copyArray;
+
+			// Display the result
+			std::cout << "Shell Sort 希尔排序：" << std::endl;
+			std::cout << '\t' << "Time 时间：" << endTime - beginTime << "ms" << std::endl;
+			std::cout << '\t' << "Change Times 交换次数：" << swapTimes << std::endl;
 		}
 
 		// Exit
@@ -189,7 +242,7 @@ void displayOptions(void) {
 	std::cout << "*     5--Merge Sort 归并排序      *" << std::endl;
 	std::cout << "*     6--Radix Sort 基数排序      *" << std::endl;
 	std::cout << "*     7--Heap Sort 堆排序         *" << std::endl;
-	std::cout << "*     8-- Sort 希尔排序           *" << std::endl;
+	std::cout << "*     8--Shell Sort 希尔排序      *" << std::endl;
 	std::cout << "*     9--Exit 退出程序            *" << std::endl;
 	std::cout << "===================================" << std::endl;
 }
